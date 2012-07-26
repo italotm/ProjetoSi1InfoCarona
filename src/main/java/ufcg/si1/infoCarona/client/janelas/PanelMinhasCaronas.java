@@ -47,8 +47,6 @@ public class PanelMinhasCaronas extends Composite {
 	    pager.setDisplay(tabelaCaronas);
 	    pager.setPageSize(10);
 
-	   
-
 		//coluna id
 		TextColumn<InfoCarona> colunaIdCarona = new TextColumn<InfoCarona>() {
 			@Override
@@ -121,14 +119,14 @@ public class PanelMinhasCaronas extends Composite {
 		Column<InfoCarona, ActionCell> colunaResponderSugestoes = (new IdentityColumn(
 				editCell2));
 
-		tabelaCaronas.addColumn(colunaIdCarona,"ID");
+		tabelaCaronas.addColumn(colunaIdCarona,"Id da Carona");
 	    tabelaCaronas.addColumn(colunaOrigem,"Origem");
 	    tabelaCaronas.addColumn(colunaDestino,"Destino");
 	    tabelaCaronas.addColumn(colunaData,"Data");
 	    tabelaCaronas.addColumn(colunaHora,"Hora");
 	    tabelaCaronas.addColumn(colunaVagas,"Vagas");
-	    tabelaCaronas.addColumn(colunaResponderSolicitacoes,"Solicitaçoes Pendentes");
 	    tabelaCaronas.addColumn(colunaResponderSugestoes,"Sugestões Pendentes");
+	    tabelaCaronas.addColumn(colunaResponderSolicitacoes,"Solicitaçoes Pendentes");
 	    
 	    colunaData.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	    colunaHora.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -155,7 +153,8 @@ public class PanelMinhasCaronas extends Composite {
 		controller.getListaCaronasUsuario(idSessao, new AsyncCallback<List<List<String>>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 
 			@Override

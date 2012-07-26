@@ -41,8 +41,8 @@ public class PanelUsuarioLogado extends Composite {
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
+						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+						dialogErro.show();						
 					}
 				});
 				
@@ -63,8 +63,8 @@ public class PanelUsuarioLogado extends Composite {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();				
 			}
 		});
 		

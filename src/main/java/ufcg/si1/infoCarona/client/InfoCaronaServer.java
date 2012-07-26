@@ -19,7 +19,7 @@ public interface InfoCaronaServer extends RemoteService{
 			String destino, String cidade, String data, String hora,
 			String vagas) throws ExceptionSerialized;
 
-	List<String> getTodasCaronas() throws ExceptionSerialized;
+	List<String> getTodasCaronas(String idSessao) throws ExceptionSerialized;
 	
 	String getLoginUsuarioLogado(String idSessao) throws ExceptionSerialized;
 	

@@ -200,17 +200,15 @@ public class PanelCadastrarCarona extends Composite {
 							boxHora.setText("");
 							boxCidade.setText("");
 							listBoxVagas.setSelectedIndex(0);
-							DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
+							DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario("Id da Carona: " +
 									result,
 									"Carona Municipal Cadastrada com Sucesso!");
 							dialogSucess.show();
 						}
 
 						public void onFailure(Throwable caught) {
-							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario(
-									"Falhou", caught.getMessage());
+							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
 							dialogErro.show();
-
 						}
 					});
 					
@@ -226,7 +224,7 @@ public class PanelCadastrarCarona extends Composite {
 							boxCidade.setText("");
 							listBoxVagas.setSelectedIndex(0);
 							DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-									result,
+									"Id da Carona: " + result,
 									"Carona Cadastrada com Sucesso!");
 							dialogSucess.show();
 							
@@ -235,8 +233,7 @@ public class PanelCadastrarCarona extends Composite {
 						}
 
 						public void onFailure(Throwable caught) {
-							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario(
-									"Falhou", caught.getMessage());
+							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
 							dialogErro.show();
 
 						}

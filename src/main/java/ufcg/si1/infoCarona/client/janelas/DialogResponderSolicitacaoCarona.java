@@ -71,8 +71,8 @@ public class DialogResponderSolicitacaoCarona extends DialogBox {
 						controller.confirmarSolicitacaoUsuario(idSessao, infoSolicitacao.getIdSolicitacao(), new AsyncCallback<String>() {
 							@Override
 							public void onFailure(Throwable caught) {
-								// TODO Auto-generated method stub
-								
+								DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+								dialogErro.show();								
 							}
 
 							@Override
@@ -92,7 +92,8 @@ public class DialogResponderSolicitacaoCarona extends DialogBox {
 						controller.recusarSolicitacaoUsuario(idSessao, infoSolicitacao.getIdSolicitacao(), new AsyncCallback<String>() {
 							@Override
 							public void onFailure(Throwable caught) {
-			
+								DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+								dialogErro.show();
 							}
 
 							@Override
@@ -162,7 +163,8 @@ public class DialogResponderSolicitacaoCarona extends DialogBox {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 		});
 	}

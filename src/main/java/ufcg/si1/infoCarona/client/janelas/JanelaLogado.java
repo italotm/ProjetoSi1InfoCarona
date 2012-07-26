@@ -18,7 +18,7 @@ public class JanelaLogado extends Composite {
 	private PanelSolicitacoesPendentes panelSolicitacoesPendentes;
 	private PanelSolicitacoesRejeitadas panelSolicitacoesRejeitadas;
 	
-	private PanelInteresses panelInteresses;
+	//private PanelInteresses panelInteresses;
 	private PanelAlterarCadastro panelAlterarCadastro;
 	
 	private InfoCaronaServerAsync controller;
@@ -37,6 +37,7 @@ public class JanelaLogado extends Composite {
 		
 		//panels para carregarno centro
 		HorizontalPanel panelCentral = new HorizontalPanel();
+		panelCentral.setSpacing(8);
 		panelLogado.add(panelCentral, DockPanel.CENTER);
 
 		
@@ -64,9 +65,9 @@ public class JanelaLogado extends Composite {
 		panelSolicitacoesRejeitadas.setVisible(false);
 		panelCentral.add(panelSolicitacoesRejeitadas);
 		
-		panelInteresses = new PanelInteresses(controller, idSessao);
+		/*panelInteresses = new PanelInteresses(controller, idSessao);
 		panelInteresses.setVisible(false);
-		panelCentral.add(panelInteresses);
+		panelCentral.add(panelInteresses);*/
 		
 		panelAlterarCadastro = new PanelAlterarCadastro(controller, idSessao);
 		panelAlterarCadastro.setVisible(false);
@@ -78,7 +79,7 @@ public class JanelaLogado extends Composite {
 		
 		panelLogado.setCellWidth(panelLogado.getWidget(2), "80%");
 		panelLogado.setCellHorizontalAlignment(panelLogado.getWidget(2), HasHorizontalAlignment.ALIGN_CENTER);
-		panelLogado.setCellVerticalAlignment(panelLogado.getWidget(2), HasVerticalAlignment.ALIGN_MIDDLE);
+		panelLogado.setCellVerticalAlignment(panelLogado.getWidget(2), HasVerticalAlignment.ALIGN_TOP);
 
 		initWidget(panelLogado);
 		
@@ -91,7 +92,7 @@ public class JanelaLogado extends Composite {
 		panelSolicitacoesAceitas.setVisible(false);
 		panelSolicitacoesPendentes.setVisible(false);
 		panelSolicitacoesRejeitadas.setVisible(false);
-		panelInteresses.setVisible(false);
+		//panelInteresses.setVisible(false);
 		panelAlterarCadastro.setVisible(false);
 	}
 	
@@ -121,10 +122,10 @@ public class JanelaLogado extends Composite {
 				panelSolicitacoesRejeitadas.setVisible(true);
 				popularSolicitacoesRejeitadas();
 				break;
-			case 9:
+			/*case 9:
 				panelInteresses.setVisible(true);
-				break;
-			case 10:
+				break;*/
+			case 9:
 				panelAlterarCadastro.setVisible(true);
 				setInformacoes();
 				break;

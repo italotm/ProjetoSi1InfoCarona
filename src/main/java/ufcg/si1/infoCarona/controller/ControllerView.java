@@ -59,10 +59,13 @@ public class ControllerView  {
 		return sistemaCarona.cadastrarCaronaMunicipal(idUsuario, origem, destino, cidade, calendario, Integer.parseInt(vagas));
 	}
 	
-	public List<String> getTodasCaronas() {
+	public List<String> getTodasCaronas(String idSessao) throws ArgumentoInexistenteException {
 		List<String> todasCaronas = new ArrayList<String>();
 		for (Carona carona : sistemaCarona.getTodasCaronas()) {
-			todasCaronas.add(carona.toStringView());
+			if (!carona.getDonoDaCarona().getLogin().equals(getUsuarioLogado(idSessao).getLogin())) {
+				todasCaronas.add(carona.toStringView());
+			}
+			
 		}
 		return todasCaronas;
 	}
@@ -168,7 +171,7 @@ public class ControllerView  {
 			if (solicitacao.getEstado().equals(EstadoSolicitacao.PENDENTE)) {
 				List<String> aux = new ArrayList<String>();
 				aux.add(solicitacao.getIdSolicitacao());
-				aux.add(solicitacao.getDonoDaCarona().getLogin());
+				aux.add(solicitacao.getDonoSolicitacao().getLogin());
 				retorno.add(aux);
 			}
 		}

@@ -36,7 +36,6 @@ public class DialogListaPontoEncontro extends DialogBox {
 	
 	public DialogListaPontoEncontro(final InfoCaronaServerAsync controller, final String idSessao, final String idCarona) {
 		novosPontos = "";
-		listaNovosPontosEncontros = new ArrayList<InfoPontoEncontro>();
 		this.idCarona = idCarona;
 		this.controller = controller;
 		
@@ -48,7 +47,6 @@ public class DialogListaPontoEncontro extends DialogBox {
 		VerticalPanel panelListaPontoEncontro = new VerticalPanel();
 		tabelaPontoEncontro = new CellTable<InfoPontoEncontro>();
 		tabelaPontoEncontro.setWidth("400px");
-		dataProvider = new ListDataProvider<InfoPontoEncontro>();
 		
 		SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
 		SimplePager pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0, true);
@@ -72,6 +70,7 @@ public class DialogListaPontoEncontro extends DialogBox {
 		
 		tabelaPontoEncontro.addColumn(colunaPontosEncontro,"Pontos de Encontro");
 		listaPontoEncontros = new ArrayList<InfoPontoEncontro>();
+		listaNovosPontosEncontros = new ArrayList<InfoPontoEncontro>();
 		populaTabela();
 					
 		HorizontalPanel hPanel01 = new HorizontalPanel();
@@ -121,17 +120,15 @@ public class DialogListaPontoEncontro extends DialogBox {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-								"Erro",
-								caught.getMessage());
-						dialogSucess.show();
+						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+						dialogErro.show();
 						
 					}
 
 					@Override
 					public void onSuccess(String result) {
 						DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-								"ID: " + result,
+								"Id do Ponto de Encontro: " + result,
 								"Pontos de Encontro Cadastrados com Sucesso!");
 						dialogSucess.show();
 						hide();
@@ -187,6 +184,7 @@ public class DialogListaPontoEncontro extends DialogBox {
 		controller.getListaPontoEncontroCarona(idCarona, new AsyncCallback<List<List<String>>>() {
 			@Override
 			public void onSuccess(List<List<String>> retorno) {
+				dataProvider = new ListDataProvider<InfoPontoEncontro>();
 				if (retorno.size() != 0) {
 					for (List<String> list : retorno) {
 						String idPontoEncontro = list.get(0);
@@ -206,7 +204,8 @@ public class DialogListaPontoEncontro extends DialogBox {
 			}
 			@Override
 			public void onFailure(Throwable caught) {
-				//
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 		});
 		

@@ -44,7 +44,7 @@ public class DialogSolicitarVagaPontoEncontro extends DialogBox {
 		this.controller = controller;
 		nomePontoEncontro = "";
 		
-		setText("Pontos de Encontro - ID: " + idCarona);
+		setText("Pontos de Encontro - Id da Carona: " + idCarona);
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
 		center();
@@ -112,9 +112,7 @@ public class DialogSolicitarVagaPontoEncontro extends DialogBox {
 					controller.solicitarVagaPontoEncontro(idSessao, idCarona, nomePontoEncontro, new AsyncCallback<String>() {
 						@Override
 						public void onFailure(Throwable caught) {
-							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario(
-									"Erro",
-									caught.getMessage());
+							DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
 							dialogErro.show();
 							
 						}
@@ -122,7 +120,7 @@ public class DialogSolicitarVagaPontoEncontro extends DialogBox {
 						@Override
 						public void onSuccess(String result) {
 							DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-									"ID: " + result,
+									"Id da Solicitação: " + result,
 									"Solicitação Realizada com Sucesso!");
 							dialogSucess.show();
 							hide();							
@@ -192,8 +190,8 @@ public class DialogSolicitarVagaPontoEncontro extends DialogBox {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 		});
 	}

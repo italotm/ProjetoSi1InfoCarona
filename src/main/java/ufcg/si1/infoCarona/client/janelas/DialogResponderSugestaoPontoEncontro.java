@@ -62,26 +62,6 @@ public class DialogResponderSugestaoPontoEncontro extends DialogBox {
 			}
 		};
 		
-	/*	EditTextCell boxSugestoes = new EditTextCell();
-
-		Column<SugestaoPontoEncontroInfo, String> colunaBoxSugestoes = (new IdentityColumn(
-				boxSugestoes));
-*/		
-		
-
-/*	    Column<SugestaoPontoEncontroInfo, String> editTextColumn =
-	        addColumn(new EditTextCell(), "EditText", new GetValue<String>() {
-	          @Override
-	          public String getValue(SugestaoPontoEncontroInfo contact) {
-	            return contact.getFirstName();
-	          }
-	        }, new FieldUpdater<SugestaoPontoEncontroInfo, String>() {
-	          @Override
-	          public void update(int index, SugestaoPontoEncontroInfo object, String value) {
-	            pendingChanges.add(new FirstNameChange(object, value));
-	          }
-	        });*/
-		
 		Column<InfoSugestaoPontoEncontro, String> colunaBoxSugestoes = new Column<InfoSugestaoPontoEncontro, String>(
 				new EditTextCell()) {
 			@Override
@@ -99,7 +79,8 @@ public class DialogResponderSugestaoPontoEncontro extends DialogBox {
 		controller.getListaSugestaoPontoEncontro(idCarona, new AsyncCallback<List<List<String>>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 			@Override
 			public void onSuccess(List<List<String>> result) {
@@ -131,14 +112,14 @@ public class DialogResponderSugestaoPontoEncontro extends DialogBox {
 
 							@Override
 							public void onFailure(Throwable caught) {
-								// TODO Auto-generated method stub
-								
+								DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+								dialogErro.show();								
 							}
 
 							@Override
 							public void onSuccess(String result) {
 								DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-										"Feito",
+										"Sucesso",
 										"Solicitação de Ponto de Encontro Confirmada com Sucesso!");
 								dialogSucess.show();								
 							}
@@ -150,9 +131,8 @@ public class DialogResponderSugestaoPontoEncontro extends DialogBox {
 				editCell));
 		
 		tabelaPontosEncontro.addColumn(colunaIdSugestaoPontoEncontro,"ID da Sugestão");
-		tabelaPontosEncontro.addColumn(colunaLoginUsuario,"Login");
+		tabelaPontosEncontro.addColumn(colunaLoginUsuario,"Login do Usuário");
 		tabelaPontosEncontro.addColumn(colunaSugestoesFeitas,"Sugestões Oferecidas");
-		
 		tabelaPontosEncontro.addColumn(colunaBoxSugestoes,"Resposta");
 		tabelaPontosEncontro.addColumn(colunaConfirmar,"");
 		

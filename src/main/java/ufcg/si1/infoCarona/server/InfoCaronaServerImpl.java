@@ -64,8 +64,13 @@ public class InfoCaronaServerImpl extends RemoteServiceServlet implements InfoCa
 	}
 	
 	@Override
-	public List<String> getTodasCaronas() throws ExceptionSerialized {
-		return controller.getTodasCaronas();
+	public List<String> getTodasCaronas(String idSessao) throws ExceptionSerialized {
+		try {
+			return controller.getTodasCaronas(idSessao);
+		} catch (Exception e) {
+			throw new ExceptionSerialized(e.getMessage());
+		}
+		
 	}
 	
 	@Override

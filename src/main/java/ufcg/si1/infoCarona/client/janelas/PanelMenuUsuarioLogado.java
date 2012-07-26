@@ -89,7 +89,7 @@ public class PanelMenuUsuarioLogado extends Composite implements TreeListener {
 		panelSolicitacoesRejeitadas.setSpacing(4);
 		panelSolicitacoesRejeitadas.setCellVerticalAlignment(labelSolicitacoesRejeitadas, HasVerticalAlignment.ALIGN_MIDDLE);
 		//panel Interesses
-		HorizontalPanel panelInteresses = new HorizontalPanel();
+		/*HorizontalPanel panelInteresses = new HorizontalPanel();
 		Image imageInteresses = new Image("imagens/calendario01.png");
 		imageInteresses.setSize("20px","20px");
 		Label labelInteresses = new Label("Interesses");
@@ -97,7 +97,7 @@ public class PanelMenuUsuarioLogado extends Composite implements TreeListener {
 		panelInteresses.add(imageInteresses);
 		panelInteresses.add(labelInteresses);
 		panelInteresses.setSpacing(4);
-		panelInteresses.setCellVerticalAlignment(labelInteresses, HasVerticalAlignment.ALIGN_MIDDLE);
+		panelInteresses.setCellVerticalAlignment(labelInteresses, HasVerticalAlignment.ALIGN_MIDDLE);*/
 		//panel alterarCadastro
 		HorizontalPanel panelAlterarCadastro = new HorizontalPanel();
 		Image imageAlterarCadastro = new Image("imagens/seguranca01.png");
@@ -118,7 +118,7 @@ public class PanelMenuUsuarioLogado extends Composite implements TreeListener {
 		TreeItem treeItemSolicitacoesAceitas = new TreeItem(panelSolicitacoesAceitas);
 		TreeItem treeItemSolicitacoesPendentes = new TreeItem(panelSolicitacoesPendentes);
 		TreeItem treeItemSolicitacoesRejeitadas = new TreeItem(panelSolicitacoesRejeitadas);
-		TreeItem treeItemInteresses = new TreeItem(panelInteresses);
+		//TreeItem treeItemInteresses = new TreeItem(panelInteresses);
 		TreeItem treeItemAlterarDados = new TreeItem(panelAlterarCadastro);
 		root.addItem(labelCarona);
 		root.addItem(treeItemCadastrarCaronas);
@@ -129,7 +129,7 @@ public class PanelMenuUsuarioLogado extends Composite implements TreeListener {
 		root.addItem(treeItemSolicitacoesPendentes);
 		root.addItem(treeItemSolicitacoesRejeitadas);
 		root.addItem(labelConfig);
-		root.addItem(treeItemInteresses);
+		//root.addItem(treeItemInteresses);
 		root.addItem(treeItemAlterarDados);
 
 		VerticalPanel vPanel = new VerticalPanel();
@@ -173,12 +173,12 @@ public class PanelMenuUsuarioLogado extends Composite implements TreeListener {
 			item.setStyleName("menuSelecionado");
 			janelaLogado.selecionarMenu(7);
 			
-		}  else if (item == item.getTree().getItem(9)) {
+		}  /*else if (item == item.getTree().getItem(9)) {
 			item.setStyleName("menuSelecionado");
 			janelaLogado.selecionarMenu(9);
-		}  else if (item == item.getTree().getItem(10)) {
+		}*/  else if (item == item.getTree().getItem(9)) {
 			item.setStyleName("menuSelecionado");
-			janelaLogado.selecionarMenu(10);
+			janelaLogado.selecionarMenu(9);
 		}
 		
 	}

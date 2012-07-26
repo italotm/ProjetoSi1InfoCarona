@@ -293,10 +293,12 @@ public class InfoCaronaServer_Proxy extends RemoteServiceProxy implements ufcg.s
     }
   }
   
-  public void getTodasCaronas(com.google.gwt.user.client.rpc.AsyncCallback retorno) {
+  public void getTodasCaronas(java.lang.String idSessao, com.google.gwt.user.client.rpc.AsyncCallback retorno) {
     com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper helper = new com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper("InfoCaronaServer_Proxy", "getTodasCaronas");
     try {
-      SerializationStreamWriter streamWriter = helper.start(REMOTE_SERVICE_INTERFACE_NAME, 0);
+      SerializationStreamWriter streamWriter = helper.start(REMOTE_SERVICE_INTERFACE_NAME, 1);
+      streamWriter.writeString("java.lang.String/2004016611");
+      streamWriter.writeString(idSessao);
       helper.finish(retorno, ResponseReader.OBJECT);
     } catch (SerializationException ex) {
       retorno.onFailure(ex);

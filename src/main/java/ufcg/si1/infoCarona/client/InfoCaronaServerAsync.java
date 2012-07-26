@@ -17,7 +17,7 @@ public interface InfoCaronaServerAsync {
 			String destino, String cidade, String data, String hora,
 			String vagas, AsyncCallback<String> retorno );
 
-	void getTodasCaronas(AsyncCallback<List<String>> retorno);
+	void getTodasCaronas(String idSessao, AsyncCallback<List<String>> retorno);
 	
 	void getLoginUsuarioLogado(String idSessao, AsyncCallback<String> login);
 	

@@ -105,17 +105,15 @@ public class PanelAlterarCadastro extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-						"Falhou",
-						caught.getMessage());
-				dialogSucess.show();
+						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+						dialogErro.show();
 						
 					}
 
 					@Override
 					public void onSuccess(String result) {
 						DialogMensagemUsuario dialogSucess = new DialogMensagemUsuario(
-								"Feito",
+								"Sucesso",
 								"Cadastro Alterado com Sucesso!");
 						dialogSucess.show();
 						
@@ -146,9 +144,7 @@ public class PanelAlterarCadastro extends Composite {
 		hPanelCadastro.setSpacing(8);
 		hPanelCadastro.setCellVerticalAlignment(vPanelCadastroUsuario, HasVerticalAlignment.ALIGN_MIDDLE);
 		hPanelCadastro.setCellHorizontalAlignment(vPanelCadastroUsuario, HasHorizontalAlignment.ALIGN_CENTER);
-		
-		
-		
+				
 		initWidget(hPanelCadastro);
 	}
 
@@ -159,7 +155,8 @@ public class PanelAlterarCadastro extends Composite {
 				controller.getInformacoesUsuario(login, new AsyncCallback<String[]>() {
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub	
+						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+						dialogErro.show();	
 					}
 					@Override
 					public void onSuccess(String[] result) {
@@ -171,8 +168,8 @@ public class PanelAlterarCadastro extends Composite {
 			}
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 		});
 	}

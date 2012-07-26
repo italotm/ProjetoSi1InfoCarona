@@ -41,7 +41,7 @@ public class PanelSolicitacoesRejeitadas extends Composite {
 	private InfoCaronaServerAsync controller;
 	private CellTable<InfoSolicitacao> tabelaSolicitacoes;
 	private ListDataProvider<InfoSolicitacao> dataProvider;
-	private final List<InfoSolicitacao> listaSolicitacoes;
+	private static List<InfoSolicitacao> listaSolicitacoes;
 	private String idSessao;
 
 	public PanelSolicitacoesRejeitadas(final InfoCaronaServerAsync controller,
@@ -49,7 +49,10 @@ public class PanelSolicitacoesRejeitadas extends Composite {
 		this.controller = controller;
 		this.idSessao = idSessao;
 
+		dataProvider = new ListDataProvider<InfoSolicitacao>();
 		listaSolicitacoes = new ArrayList<InfoSolicitacao>();
+
+		
 		VerticalPanel panelSolicitacoesRejeitadas = new VerticalPanel();
 		panelSolicitacoesRejeitadas.setWidth("100%");
 		// tabela para colocar as caronas
@@ -92,8 +95,8 @@ public class PanelSolicitacoesRejeitadas extends Composite {
 								String data = result.get(4);
 								String hora = result.get(5);
 								String vagas= result.get(6);
-								String mensagem = "ID: " + idCarona + "| Motorista: " + motorista + "| Origem: " + origem + "| Destino: " + destino + "| Data: " + data + "| Hora: " + hora + "| Vagas: " + vagas;
-								DialogMensagemUsuario dialogInfoCarona = new DialogMensagemUsuario("Informação da Carona - "+idCarona, mensagem);
+								String mensagem = "Id da Carona: " + idCarona + " | Motorista: " + motorista + " | Origem: " + origem + " | Destino: " + destino + " | Data: " + data + " | Hora: " + hora + " | Vagas: " + vagas;
+								DialogMensagemUsuario dialogInfoCarona = new DialogMensagemUsuario("Informação da Carona", mensagem);
 								dialogInfoCarona.show();
 							}
 						});
@@ -111,7 +114,7 @@ public class PanelSolicitacoesRejeitadas extends Composite {
 			}
 		};
 
-		tabelaSolicitacoes.addColumn(colunaIdSolicitacao, "ID");
+		tabelaSolicitacoes.addColumn(colunaIdSolicitacao, "Id da Solicitação");
 		tabelaSolicitacoes.addColumn(colunaPontoEncontro, "Ponto de Encontro");
 		tabelaSolicitacoes.addColumn(colunaIdCaronaSolicitacao, "Carona");
 
@@ -135,33 +138,32 @@ public class PanelSolicitacoesRejeitadas extends Composite {
 	}
 
 	public void popularTabela() {
-
-		for (int i = 0; i < listaSolicitacoes.size(); i++) {
-			listaSolicitacoes.remove(0);
-		}
+		listaSolicitacoes.clear();
 		controller.getSolicitacoesRejeitadasUsuario(idSessao,
 				new AsyncCallback<List<List<String>>>() {
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 
 			@Override
 			public void onSuccess(List<List<String>> result) {
+				dataProvider = new ListDataProvider<InfoSolicitacao>();
+				listaSolicitacoes = new ArrayList<InfoSolicitacao>();
 				for (List<String> list : result) {
-					String idSolicitacao = list.get(0);
-					String idCarona = list.get(1);
-					String pontoEncontro = list.get(2);
-					InfoSolicitacao solicitacaoInfo = new InfoSolicitacao(
-							idSolicitacao, idCarona, pontoEncontro);
-					listaSolicitacoes.add(solicitacaoInfo);
-
+					if(list.size() >= 3) {
+						String idSolicitacao = list.get(0);
+						String idCarona = list.get(1);
+						String pontoEncontro = list.get(2);
+						InfoSolicitacao solicitacaoInfo = new InfoSolicitacao(idSolicitacao, idCarona, pontoEncontro);
+						listaSolicitacoes.add(solicitacaoInfo);
+					}
 				}
 
 				tabelaSolicitacoes.setRowCount(
 						listaSolicitacoes.size(), true);
 				tabelaSolicitacoes.setRowData(0, listaSolicitacoes);
-				dataProvider = new ListDataProvider<InfoSolicitacao>();
 				dataProvider.setList(listaSolicitacoes);
 				dataProvider.addDataDisplay(tabelaSolicitacoes);
 			}

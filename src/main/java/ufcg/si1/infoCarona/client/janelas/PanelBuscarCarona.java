@@ -41,11 +41,14 @@ public class PanelBuscarCarona extends Composite {
 	private ListDataProvider<InfoCarona> dataProvider; 
 	private TextBox boxEfetuarBusca; 
 	private String idCaronaSelecionada;
+	private String idSessao;
 	
 	public PanelBuscarCarona(final InfoCaronaServerAsync controller, final String idSessao) {
 		this.controller = controller;
-		
+		this.idSessao = idSessao;
+		listaCaronas = new ArrayList<InfoCarona>();
 		boxEfetuarBusca = new TextBox();
+		
 		
 		VerticalPanel panelBuscarCarona = new VerticalPanel();
 		panelBuscarCarona.setWidth("100%");		
@@ -57,11 +60,6 @@ public class PanelBuscarCarona extends Composite {
 	    pager.setDisplay(tabelaCaronas);
 	    pager.setPageSize(10);
 
-	    
-	    //coluna selecao
-	
-
-	    
 	    final SingleSelectionModel<InfoCarona> selectionModel = new SingleSelectionModel<InfoCarona>();
 
 		tabelaCaronas.setSelectionModel(selectionModel,DefaultSelectionEventManager.<InfoCarona> createCheckboxManager());
@@ -193,7 +191,6 @@ public class PanelBuscarCarona extends Composite {
 		botaoCriarFiltro.getElement().appendChild(imageFiltro.getElement());
 		
 		botaoCriarFiltro.addClickHandler(new ClickHandler() {
-			
 			public void onClick(ClickEvent event) {
 				dialogFiltro.show();
 			}
@@ -243,9 +240,7 @@ public class PanelBuscarCarona extends Composite {
 		panelBuscarCarona.setCellHorizontalAlignment(tabelaCaronas, HasHorizontalAlignment.ALIGN_CENTER);
 		panelBuscarCarona.setCellHorizontalAlignment(pager, HasHorizontalAlignment.ALIGN_CENTER);
 		panelBuscarCarona.setSpacing(8);
-		
-		
-		
+	
 		initWidget(panelBuscarCarona);
 	    
 		
@@ -264,10 +259,11 @@ public class PanelBuscarCarona extends Composite {
 	
 	public void popularTabela() {
 		boxEfetuarBusca.setText("");
-		controller.getTodasCaronas(new AsyncCallback<List<String>>() {
+		controller.getTodasCaronas(idSessao, new AsyncCallback<List<String>>() {
 			@Override
 			public void onSuccess(List<String> todasCaronasOriginal) {
 				listaCaronas = new ArrayList<InfoCarona>();
+				dataProvider = new ListDataProvider<InfoCarona>();
 				for (String caronaInfo : todasCaronasOriginal) {
 					String[] infoCarona = caronaInfo.split("!");
 					String idCarona = infoCarona[0];
@@ -290,8 +286,8 @@ public class PanelBuscarCarona extends Composite {
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
+				dialogErro.show();
 			}
 		});
 		

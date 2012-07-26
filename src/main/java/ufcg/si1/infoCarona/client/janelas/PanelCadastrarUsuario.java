@@ -122,7 +122,7 @@ public class PanelCadastrarUsuario extends Composite {
 					}
 					
 					public void onFailure(Throwable caught) {
-						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Falhou", caught.getMessage());
+						DialogMensagemUsuario dialogErro = new DialogMensagemUsuario("Aconteceu um Erro.", caught.getMessage());
 						dialogErro.show();						
 					}
 				});

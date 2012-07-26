@@ -1,5 +1,7 @@
 package ufcg.si1.infoCarona.model;
 
+import ufcg.si1.infoCarona.controller.ControlerRepositorio;
+
 /**
  * Classe singleton que gera Id's para todas as opções do sistema 
  * @author Italo Tavares
@@ -11,13 +13,13 @@ package ufcg.si1.infoCarona.model;
 public class Id {
 	
 	private int numeroDeDigitos;
-	private int cont = 0;
+	private int cont;
 	private String ultimoId;
 	public static Id instance;
 	
-	
 	protected Id(int numeroDeDigitos){
 		  this.numeroDeDigitos = numeroDeDigitos;
+		  cont = 0;
 	}
 	/**
 	 * Construtor singleton da classe
