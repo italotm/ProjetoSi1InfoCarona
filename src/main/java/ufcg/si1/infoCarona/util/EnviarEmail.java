@@ -43,7 +43,7 @@ public class EnviarEmail {
         props.put("mail.smtp.host", mailSMTPServer); //server SMTP do GMAIL  
         props.put("mail.smtp.auth", "true"); //ativa autenticacao  
         props.put("mail.smtp.user", nomeDestinatario); //usuario ou seja, a conta que esta enviando o email (tem que ser do GMAIL)  
-        props.put("mail.debug", "true");  
+        props.put("mail.debug", "false");  
         props.put("mail.smtp.port", mailSMTPServerPort); //porta  
         props.put("mail.smtp.socketFactory.port", mailSMTPServerPort); //mesma porta para o socket  
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");  
@@ -53,7 +53,7 @@ public class EnviarEmail {
         auth = new SimpleAuth (emailRemtente,senhaRemetente);  
           
         Session session = Session.getDefaultInstance(props);  
-        session.setDebug(true); //Habilita o LOG das ações executadas durante o envio do email  
+        session.setDebug(false); //Habilita o LOG das ações executadas durante o envio do email  
   
           
         Message msg = new MimeMessage(session);  

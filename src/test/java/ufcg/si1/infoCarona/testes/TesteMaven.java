@@ -39,6 +39,9 @@ public class TesteMaven extends TestCase {
 		files.add("scripts/US11.txt");
 		files.add("scripts/US12.txt");
 		// Instantiate the Monopoly Game fa�ade
+		files.add("scripts/US15.txt");
+		files.add("scripts/US16.txt");
+		files.add("scripts/US17.txt");
 		
 		Fachada fachadaInfoCarona = new Fachada();
 
